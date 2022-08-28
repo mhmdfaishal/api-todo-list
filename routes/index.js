@@ -4,6 +4,9 @@ var router = express.Router();
 const todocontroller = require('../controllers/todo');
 const activitycontroller = require('../controllers/activity');
 
+router.get('/', function(req, res, next) {
+    res.send('Welcome to API Todo List');
+});
 /* activities */
 router.get('/activity-groups', activitycontroller.getAll);
 router.get('/activity-groups/:id', activitycontroller.getOne);

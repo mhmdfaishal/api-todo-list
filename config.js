@@ -1,10 +1,11 @@
+const dotenv = require('dotenv');
+dotenv.config();
 const config = {
     db: {
-      host: 'localhost',
-      user: 'root',
-      password: 'Alskdjfhg1q2w3e4r5t',
-      database: 'api_todolist'
-    },
-    listPerPage: 10,
+      host: process.env.MYSQL_HOST,
+      user: process.env.MYSQL_USER,
+      password: process.env.MYSQL_PASSWORD,
+      database: process.env.MYSQL_DBNAME
+    }
   };
   module.exports = config;

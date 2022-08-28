@@ -1,0 +1,54 @@
+version: "3.8"
+
+services:
+  nodejs:
+    build:
+      context: .
+    image: mhmdfaishal/api-todo-list
+    env_file: ./.env
+    depends_on:
+      - mysql
+    networks:
+      - api-todo-list
+    environment:
+      - MYSQL_HOST=$MYSQL_HOST
+      - MYSQL_USER=$MYSQL_USER
+      - MYSQL_PASSWORD=$MYSQL_PASSWORD
+      - MYSQL_DBNAME=$MYSQL_DBNAME
+    ports:
+      - "3030:3030"
+    container_name: app_docker
+  mysql:
+    image: mysql:5.7
+    env_file: ./.env
+    networks:
+      - api-todo-list
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=$MYSQL_USER
+      - MYSQL_PASSWORD=$MYSQL_PASSWORD
+      - MYSQL_DATABASE=$MYSQL_DBNAME
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    container_name: mysql_docker
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:4.7
+    env_file: ./.env
+    networks:
+      - api-todo-list
+    depends_on:
+      - mysql
+    ports:
+      - "8090:80"
+    volumes:
+      - /sessions
+    environment:
+      - PMA_HOST=$MYSQL_HOST
+      - PMA_PORT=$MYSQL_PORT
+    container_name: phpmyadmin_docker
+networks:
+  api-todo-list:
+
+  
+
+
+  

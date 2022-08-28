@@ -13,7 +13,11 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({secret:"apitodolist"})); // Mengatur session dengan secret key
+app.use(session({
+  secret:"apitodolist",
+  resave: true,
+  saveUninitialized: true
+})); // Mengatur session dengan secret key
 app.use(flash());
 
 
